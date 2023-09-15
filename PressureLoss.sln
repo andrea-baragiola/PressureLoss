@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressureLossCalculations", "PressureLossCalculations\PressureLossCalculations.csproj", "{1B7123E2-626A-44CF-974F-D27561F0127E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PressureLossCalculations", "PressureLossCalculations\PressureLossCalculations.csproj", "{1B7123E2-626A-44CF-974F-D27561F0127E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLConsoleApp", "PLConsoleApp\PLConsoleApp.csproj", "{5773A414-6BFF-4D04-8D1D-98B3E00BF97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLConsoleApp", "PLConsoleApp\PLConsoleApp.csproj", "{5773A414-6BFF-4D04-8D1D-98B3E00BF97E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLWinFormsApp", "PLWinFormsApp\PLWinFormsApp.csproj", "{D89B7EB7-BF26-437C-A9E7-3316239268CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5773A414-6BFF-4D04-8D1D-98B3E00BF97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5773A414-6BFF-4D04-8D1D-98B3E00BF97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5773A414-6BFF-4D04-8D1D-98B3E00BF97E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D89B7EB7-BF26-437C-A9E7-3316239268CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D89B7EB7-BF26-437C-A9E7-3316239268CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D89B7EB7-BF26-437C-A9E7-3316239268CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D89B7EB7-BF26-437C-A9E7-3316239268CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
