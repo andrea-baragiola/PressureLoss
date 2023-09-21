@@ -8,6 +8,7 @@ namespace PressureLossCalculations
 {
     public class ResultsHazenWilliams : IResults
     {
+        public InputData InputData { get; set; }
         public double TotalPressureLoss { get; set; }
         public double UnitaryFrictionalPressureLoss { get; set; }
         public double FrictionalPressureLoss { get; set; }
@@ -16,6 +17,8 @@ namespace PressureLossCalculations
 
         public ResultsHazenWilliams(InputData inputData)
         {
+            InputData = inputData;
+
             // FRICTIONAL LOSSES
             UnitaryFrictionalPressureLoss =
                 10.67 * Math.Pow(inputData.WaterFlowRate/1000, 1.85) / 

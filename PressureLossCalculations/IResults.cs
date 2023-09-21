@@ -2,7 +2,7 @@
 {
     public interface IResults
     {
-
+        InputData InputData { get; set; }
         double UnitaryFrictionalPressureLoss { get; set; }
         double FrictionalPressureLoss { get; set; }
         double LocalPressureLoss { get; set; }

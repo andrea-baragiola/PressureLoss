@@ -1,12 +1,17 @@
+using System.Data.Common;
+using System.Globalization;
 using PressureLossCalculations;
 
 namespace PLWinFormsApp
 {
+
     public partial class PressureLossApp : Form
     {
+
         public PressureLossApp()
         {
             InitializeComponent();
+
         }
 
         private void inputDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
@@ -25,6 +30,8 @@ namespace PLWinFormsApp
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
+            Utilities.ResetInputsCellsColor(inputDataGridView);
+
             List<InputData> inputList = new List<InputData>();
             List<Tuple<string, int>> errorCohordinates = new List<Tuple<string, int>>();
 
@@ -32,8 +39,7 @@ namespace PLWinFormsApp
             {
                 if (!row.IsNewRow)
                 {
-                    // provo a prendere i valori, in caso di errore ritorno false e errori
-                    GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
+                    Utilities.GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
                     rowErrorCohordinates.RemoveAll(item => item == null);
 
                     if (rowErrorCohordinates.Count == 0)
@@ -47,42 +53,19 @@ namespace PLWinFormsApp
                 }
             }
             errorCohordinates.RemoveAll(item => item == null);
+
             if (errorCohordinates.Count == 0)
             {
-                outputText.Text = "andato bene";
+                List<IResults> results = Utilities.GetAllResults(inputList);
+                Utilities.ShowResults(results, resultDataGridView);
             }
             else
             {
-                outputText.Text = "andato male";
+                Utilities.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView);
             }
 
+            inputDataGridView.ClearSelection();
 
-        }
-
-        void GetAndValidateRowInputs(DataGridViewRow row, out InputData inputData, out List<Tuple<string, int>> rowErrorCohordinates)
-        {
-            rowErrorCohordinates = new List<Tuple<string, int>>();
-            rowErrorCohordinates.Add(RetrieveDoubleValue(row, "PipeLength", out double pipeLength));
-            rowErrorCohordinates.Add(RetrieveDoubleValue(row, "PipeDiameter", out double pipeDiameter));
-            rowErrorCohordinates.Add(RetrieveDoubleValue(row, "PipeSurfaceFactor", out double pipeSurfaceFactor));
-            rowErrorCohordinates.Add(RetrieveDoubleValue(row, "WaterFlowRate", out double waterFlowRate));
-
-            inputData = new InputData(pipeLength, pipeDiameter, pipeSurfaceFactor, waterFlowRate, 0, 0, 0);
-
-
-        }
-
-        Tuple<string, int> RetrieveDoubleValue(DataGridViewRow row, string columnName, out double value)
-        {
-            bool parseValidity = double.TryParse(row.Cells[columnName].Value.ToString(), out value);
-            if (!parseValidity || value < 0)
-            {
-                return new Tuple<string, int>(columnName, row.Index);
-            }
-            else
-            {
-                return null;
-            }
 
         }
 
