@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PressureLossCalculations;
+using PressureLossCalculations.Calculations;
 using PressureLossCalculations.Models;
 
 namespace PLWinFormsApp
