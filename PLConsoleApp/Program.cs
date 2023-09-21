@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using PLConsoleApp.InputHelpers;
 using PressureLossCalculations;
+using PressureLossCalculations.Calculations;
 using PressureLossCalculations.Models;
 
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
