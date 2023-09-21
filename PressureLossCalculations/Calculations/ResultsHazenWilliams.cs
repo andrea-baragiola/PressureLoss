@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PressureLossCalculations.Models;
 
-namespace PressureLossCalculations
+namespace PressureLossCalculations.Calculations
 {
     public class ResultsHazenWilliams : IResults
     {
@@ -22,8 +22,8 @@ namespace PressureLossCalculations
 
             // FRICTIONAL LOSSES
             UnitaryFrictionalPressureLoss =
-                10.67 * Math.Pow(inputData.WaterFlowRate/1000, 1.85) / 
-                (Math.Pow(inputData.PipeSurfaceFactor, 1.85) * Math.Pow(inputData.PipeDiameter/1000, 4.86));
+                10.67 * Math.Pow(inputData.WaterFlowRate / 1000, 1.85) /
+                (Math.Pow(inputData.PipeSurfaceFactor, 1.85) * Math.Pow(inputData.PipeDiameter / 1000, 4.86));
             FrictionalPressureLoss = UnitaryFrictionalPressureLoss * inputData.PipeLength;
 
             // LOCAL LOSSES
