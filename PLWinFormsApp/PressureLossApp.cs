@@ -1,6 +1,6 @@
 using System.Data.Common;
 using System.Globalization;
-using PressureLossCalculations;
+using PressureLossCalculations.Models;
 
 namespace PLWinFormsApp
 {

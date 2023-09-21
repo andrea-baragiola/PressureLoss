@@ -1,4 +1,4 @@
-﻿namespace PressureLossCalculations
+﻿namespace PressureLossCalculations.Models
 {
     public interface IResults
     {
