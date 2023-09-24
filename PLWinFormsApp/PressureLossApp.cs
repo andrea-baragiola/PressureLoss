@@ -19,8 +19,8 @@ namespace PLWinFormsApp
             // Set default values for specific columns
             e.Row.Cells["Tratto"].Value = e.Row.Index + 1;
             e.Row.Cells["PipeLength"].Value = 0;
-            e.Row.Cells["PipeDiameter"].Value = 20;
-            e.Row.Cells["PipeSurfaceFactor"].Value = 100;
+            e.Row.Cells["PipeDiameter"].Value = 0;
+            e.Row.Cells["PipeSurfaceFactor"].Value = 0;
             e.Row.Cells["WaterFlowRate"].Value = 0;
             e.Row.Cells["NumberOf90DegCurves"].Value = 0;
             e.Row.Cells["NumberOf45DegCurves"].Value = 0;
@@ -69,6 +69,12 @@ namespace PLWinFormsApp
 
         }
 
-
+        private void inputDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == inputDataGridView.Columns["Delete"].Index)
+            {
+                inputDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+        }
     }
 }

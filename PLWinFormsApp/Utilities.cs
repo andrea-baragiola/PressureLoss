@@ -57,7 +57,7 @@ namespace PLWinFormsApp
         internal static Tuple<string, int> RetrieveDoubleValue(DataGridViewRow row, string columnName, out double value)
         {
             bool parseValidity = double.TryParse(row.Cells[columnName].Value.ToString(), out value);
-            if (!parseValidity || value < 0)
+            if (!parseValidity || value <= 0)
             {
                 return new Tuple<string, int>(columnName, row.Index);
             }
