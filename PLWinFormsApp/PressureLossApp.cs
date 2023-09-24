@@ -40,10 +40,12 @@ namespace PLWinFormsApp
             {
                 List<IResults> results = Utilities.GetAllResults(inputList);
                 GraphicalHelpers.ShowResults(results, resultDataGridView);
+                AlertLabel.Text = string.Empty;
             }
             else
             {
-                GraphicalHelpers.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView, CalculateButton);
+                GraphicalHelpers.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView);
+                AlertLabel.Text = "Correct the highlighted values, then retry";
             }
 
             inputDataGridView.ClearSelection();

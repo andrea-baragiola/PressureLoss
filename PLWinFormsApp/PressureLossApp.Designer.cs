@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             inputDataGridView = new DataGridView();
+            Tratto = new DataGridViewTextBoxColumn();
+            PipeLength = new DataGridViewTextBoxColumn();
+            PipeDiameter = new DataGridViewTextBoxColumn();
+            WaterFlowRate = new DataGridViewTextBoxColumn();
+            PipeSurfaceFactor = new DataGridViewTextBoxColumn();
+            NumberOf90DegCurves = new DataGridViewTextBoxColumn();
+            NumberOf45DegCurves = new DataGridViewTextBoxColumn();
+            NumberOfTJunctions = new DataGridViewTextBoxColumn();
+            Delete = new DataGridViewButtonColumn();
             CalculateButton = new Button();
             resultDataGridView = new DataGridView();
             RTratto = new DataGridViewTextBoxColumn();
@@ -44,15 +53,7 @@
             title = new Label();
             inputInstructionsLabel = new Label();
             tableLayoutPanelGeneral = new TableLayoutPanel();
-            Tratto = new DataGridViewTextBoxColumn();
-            PipeLength = new DataGridViewTextBoxColumn();
-            PipeDiameter = new DataGridViewTextBoxColumn();
-            WaterFlowRate = new DataGridViewTextBoxColumn();
-            PipeSurfaceFactor = new DataGridViewTextBoxColumn();
-            NumberOf90DegCurves = new DataGridViewTextBoxColumn();
-            NumberOf45DegCurves = new DataGridViewTextBoxColumn();
-            NumberOfTJunctions = new DataGridViewTextBoxColumn();
-            Delete = new DataGridViewButtonColumn();
+            AlertLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)inputDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
             tableLayoutPanelIO.SuspendLayout();
@@ -65,19 +66,76 @@
             inputDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             inputDataGridView.Columns.AddRange(new DataGridViewColumn[] { Tratto, PipeLength, PipeDiameter, WaterFlowRate, PipeSurfaceFactor, NumberOf90DegCurves, NumberOf45DegCurves, NumberOfTJunctions, Delete });
             inputDataGridView.Dock = DockStyle.Fill;
-            inputDataGridView.Location = new Point(3, 53);
+            inputDataGridView.Location = new Point(3, 58);
             inputDataGridView.Name = "inputDataGridView";
             inputDataGridView.RowTemplate.Height = 25;
-            inputDataGridView.Size = new Size(765, 218);
+            inputDataGridView.Size = new Size(765, 192);
             inputDataGridView.TabIndex = 3;
             inputDataGridView.CellContentClick += inputDataGridView_CellContentClick;
             inputDataGridView.DefaultValuesNeeded += inputDataGridView_DefaultValuesNeeded;
+            // 
+            // Tratto
+            // 
+            Tratto.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Tratto.HeaderText = "Tratto";
+            Tratto.Name = "Tratto";
+            Tratto.ReadOnly = true;
+            // 
+            // PipeLength
+            // 
+            PipeLength.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            PipeLength.HeaderText = "Pipe Length (m)";
+            PipeLength.Name = "PipeLength";
+            // 
+            // PipeDiameter
+            // 
+            PipeDiameter.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            PipeDiameter.HeaderText = "PipeDiameter (mm)";
+            PipeDiameter.Name = "PipeDiameter";
+            // 
+            // WaterFlowRate
+            // 
+            WaterFlowRate.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            WaterFlowRate.HeaderText = "Water Flow Rate (l/s)";
+            WaterFlowRate.Name = "WaterFlowRate";
+            // 
+            // PipeSurfaceFactor
+            // 
+            PipeSurfaceFactor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            PipeSurfaceFactor.HeaderText = "Surface Factor";
+            PipeSurfaceFactor.Name = "PipeSurfaceFactor";
+            // 
+            // NumberOf90DegCurves
+            // 
+            NumberOf90DegCurves.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            NumberOf90DegCurves.HeaderText = "90° Curves (quantity)";
+            NumberOf90DegCurves.Name = "NumberOf90DegCurves";
+            // 
+            // NumberOf45DegCurves
+            // 
+            NumberOf45DegCurves.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            NumberOf45DegCurves.HeaderText = "45° Curves (quantity)";
+            NumberOf45DegCurves.Name = "NumberOf45DegCurves";
+            // 
+            // NumberOfTJunctions
+            // 
+            NumberOfTJunctions.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            NumberOfTJunctions.HeaderText = "T. Junctions (quantity)";
+            NumberOfTJunctions.Name = "NumberOfTJunctions";
+            // 
+            // Delete
+            // 
+            Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Delete.HeaderText = "";
+            Delete.Name = "Delete";
+            Delete.Text = "Delete Row";
+            Delete.UseColumnTextForButtonValue = true;
             // 
             // CalculateButton
             // 
             CalculateButton.Anchor = AnchorStyles.None;
             CalculateButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            CalculateButton.Location = new Point(253, 281);
+            CalculateButton.Location = new Point(253, 265);
             CalculateButton.Name = "CalculateButton";
             CalculateButton.Size = new Size(265, 40);
             CalculateButton.TabIndex = 4;
@@ -94,10 +152,10 @@
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { RTratto, RPipeLength, RPipeDiameter, RWaterFlowRate, UnitaryFrictionalPressureLoss, FrictionalPressureLoss, LocalPressureLoss, EquivalentLength, TotalPressureLoss });
             resultDataGridView.Dock = DockStyle.Fill;
-            resultDataGridView.Location = new Point(3, 331);
+            resultDataGridView.Location = new Point(3, 341);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowTemplate.Height = 25;
-            resultDataGridView.Size = new Size(765, 216);
+            resultDataGridView.Size = new Size(765, 224);
             resultDataGridView.TabIndex = 6;
             // 
             // RTratto
@@ -168,20 +226,21 @@
             tableLayoutPanelIO.ColumnCount = 1;
             tableLayoutPanelIO.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanelIO.Controls.Add(CalculateButton, 0, 3);
-            tableLayoutPanelIO.Controls.Add(resultDataGridView, 0, 4);
             tableLayoutPanelIO.Controls.Add(title, 0, 0);
             tableLayoutPanelIO.Controls.Add(inputDataGridView, 0, 2);
             tableLayoutPanelIO.Controls.Add(inputInstructionsLabel, 0, 1);
+            tableLayoutPanelIO.Controls.Add(resultDataGridView, 0, 5);
+            tableLayoutPanelIO.Controls.Add(AlertLabel, 0, 4);
             tableLayoutPanelIO.Dock = DockStyle.Fill;
             tableLayoutPanelIO.Location = new Point(3, 3);
             tableLayoutPanelIO.Name = "tableLayoutPanelIO";
             tableLayoutPanelIO.RowCount = 7;
             tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 3.84615374F));
-            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 43.0769234F));
-            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 10.3846149F));
-            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 42.6923065F));
+            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 40.1913872F));
+            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 13.1578913F));
             tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Percent, 46.65072F));
             tableLayoutPanelIO.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanelIO.Size = new Size(771, 590);
             tableLayoutPanelIO.TabIndex = 7;
@@ -220,62 +279,15 @@
             tableLayoutPanelGeneral.Size = new Size(777, 596);
             tableLayoutPanelGeneral.TabIndex = 8;
             // 
-            // Tratto
+            // AlertLabel
             // 
-            Tratto.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Tratto.HeaderText = "Tratto";
-            Tratto.Name = "Tratto";
-            Tratto.ReadOnly = true;
-            // 
-            // PipeLength
-            // 
-            PipeLength.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PipeLength.HeaderText = "Pipe Length (m)";
-            PipeLength.Name = "PipeLength";
-            // 
-            // PipeDiameter
-            // 
-            PipeDiameter.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PipeDiameter.HeaderText = "PipeDiameter (mm)";
-            PipeDiameter.Name = "PipeDiameter";
-            // 
-            // WaterFlowRate
-            // 
-            WaterFlowRate.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            WaterFlowRate.HeaderText = "Water Flow Rate (l/s)";
-            WaterFlowRate.Name = "WaterFlowRate";
-            // 
-            // PipeSurfaceFactor
-            // 
-            PipeSurfaceFactor.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PipeSurfaceFactor.HeaderText = "Surface Factor";
-            PipeSurfaceFactor.Name = "PipeSurfaceFactor";
-            // 
-            // NumberOf90DegCurves
-            // 
-            NumberOf90DegCurves.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            NumberOf90DegCurves.HeaderText = "90° Curves (quantity)";
-            NumberOf90DegCurves.Name = "NumberOf90DegCurves";
-            // 
-            // NumberOf45DegCurves
-            // 
-            NumberOf45DegCurves.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            NumberOf45DegCurves.HeaderText = "45° Curves (quantity)";
-            NumberOf45DegCurves.Name = "NumberOf45DegCurves";
-            // 
-            // NumberOfTJunctions
-            // 
-            NumberOfTJunctions.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            NumberOfTJunctions.HeaderText = "T. Junctions (quantity)";
-            NumberOfTJunctions.Name = "NumberOfTJunctions";
-            // 
-            // Delete
-            // 
-            Delete.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Delete.HeaderText = "";
-            Delete.Name = "Delete";
-            Delete.Text = "Delete Row";
-            Delete.UseColumnTextForButtonValue = true;
+            AlertLabel.Anchor = AnchorStyles.Top;
+            AlertLabel.AutoSize = true;
+            AlertLabel.ForeColor = SystemColors.MenuHighlight;
+            AlertLabel.Location = new Point(385, 318);
+            AlertLabel.Name = "AlertLabel";
+            AlertLabel.Size = new Size(0, 15);
+            AlertLabel.TabIndex = 9;
             // 
             // PressureLossApp
             // 
@@ -319,5 +331,6 @@
         private DataGridViewTextBoxColumn NumberOf45DegCurves;
         private DataGridViewTextBoxColumn NumberOfTJunctions;
         private DataGridViewButtonColumn Delete;
+        private Label AlertLabel;
     }
 }

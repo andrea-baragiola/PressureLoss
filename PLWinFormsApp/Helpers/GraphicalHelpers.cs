@@ -4,7 +4,7 @@ internal static class GraphicalHelpers
 {
 
     internal static void HighlightsMistakes
-        (List<Tuple<string, int>> errorCohordinates, DataGridView inputDataGridView, DataGridView resultDataGridView, Button calculateButton)
+        (List<Tuple<string, int>> errorCohordinates, DataGridView inputDataGridView, DataGridView resultDataGridView)
     {
         foreach (Tuple<string, int> cohordinate in errorCohordinates)
         {
