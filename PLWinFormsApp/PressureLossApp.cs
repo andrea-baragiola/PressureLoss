@@ -1,5 +1,6 @@
 using System.Data.Common;
 using System.Globalization;
+using PLWinFormsApp.Helpers;
 using PressureLossCalculations.Models;
 
 namespace PLWinFormsApp
@@ -11,7 +12,6 @@ namespace PLWinFormsApp
         public PressureLossApp()
         {
             InitializeComponent();
-
         }
 
         private void inputDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
@@ -30,11 +30,31 @@ namespace PLWinFormsApp
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            Utilities.ResetInputsCellsColor(inputDataGridView);
+            GraphicalHelpers.ResetInputsCellsColor(inputDataGridView);
 
-            List<InputData> inputList = new List<InputData>();
-            List<Tuple<string, int>> errorCohordinates = new List<Tuple<string, int>>();
+            List<InputData> inputList;
+            List<Tuple<string, int>> errorCohordinates;
+            GetErrorCohordinates(out inputList, out errorCohordinates);
 
+            if (errorCohordinates.Count == 0)
+            {
+                List<IResults> results = Utilities.GetAllResults(inputList);
+                GraphicalHelpers.ShowResults(results, resultDataGridView);
+            }
+            else
+            {
+                GraphicalHelpers.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView, CalculateButton);
+            }
+
+            inputDataGridView.ClearSelection();
+
+
+        }
+
+        private void GetErrorCohordinates(out List<InputData> inputList, out List<Tuple<string, int>> errorCohordinates)
+        {
+            inputList = new List<InputData>();
+            errorCohordinates = new List<Tuple<string, int>>();
             foreach (DataGridViewRow row in inputDataGridView.Rows)
             {
                 if (!row.IsNewRow)
@@ -53,20 +73,6 @@ namespace PLWinFormsApp
                 }
             }
             errorCohordinates.RemoveAll(item => item == null);
-
-            if (errorCohordinates.Count == 0)
-            {
-                List<IResults> results = Utilities.GetAllResults(inputList);
-                Utilities.ShowResults(results, resultDataGridView);
-            }
-            else
-            {
-                Utilities.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView);
-            }
-
-            inputDataGridView.ClearSelection();
-
-
         }
 
         private void inputDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
