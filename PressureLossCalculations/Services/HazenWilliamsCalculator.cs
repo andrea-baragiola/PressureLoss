@@ -7,10 +7,10 @@ using PressureLossCalculations.Models;
 
 namespace PressureLossCalculations.Services
 {
-    public static class HazenWilliamsCalculator
+    public class HazenWilliamsCalculator : ICalculator
     {
 
-        public static ResultsHazenWilliams ResultsHazenWilliamsCalculate(InputData inputData)
+        public ResultsHazenWilliams Calculate(InputData inputData)
         {
 
             // FRICTIONAL LOSSES

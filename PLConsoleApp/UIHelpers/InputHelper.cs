@@ -5,30 +5,7 @@ namespace PLConsoleApp.InputHelpers
 {
     internal static class InputHelper
     {
-        internal static List<IResults> GetPipesInputs()
-        {
-            List<IResults> ResultsList = new List<IResults>();
-
-            while (true)
-            {
-                InputData inputData = GetIndividualPipeInputs();
-
-                IResults results = HazenWilliamsCalculator.ResultsHazenWilliamsCalculate(inputData);
-
-                ResultsList.Add(results);
-
-                Console.WriteLine("Do you want to add another pipe? (y/n)");
-                string answer = Console.ReadLine();
-                while (answer != "y" && answer != "n")
-                {
-                    Console.WriteLine("Unacceptable answer. Do you want to add another pipe? (y/n)");
-                    answer = Console.ReadLine();
-                }
-                if (answer == "n") break;
-            }
-
-            return ResultsList;
-        }
+        
 
         internal static InputData GetIndividualPipeInputs()
         {
