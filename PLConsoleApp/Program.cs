@@ -12,7 +12,7 @@ CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 var container = Startup.ConfigureService();
 var calculator = container.GetRequiredService<ICalculator>();
 
-UILogic uilogic = new UILogic(calculator);
+ConsoleUILogic uilogic = new ConsoleUILogic(calculator);
 
 List<IResults> ResultsList = uilogic.GetInputsAndCalculate();
 

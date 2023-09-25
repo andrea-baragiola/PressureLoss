@@ -4,10 +4,10 @@ using PressureLossCalculations.Services;
 
 namespace PLConsoleApp.UILogic
 {
-    public class UILogic
+    public class ConsoleUILogic
     {
         private readonly ICalculator _calculator;
-        public UILogic(ICalculator calculator)
+        public ConsoleUILogic(ICalculator calculator)
         {
             _calculator = calculator;
         }

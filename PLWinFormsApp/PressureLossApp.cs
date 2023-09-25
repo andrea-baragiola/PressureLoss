@@ -2,15 +2,17 @@ using System.Data.Common;
 using System.Globalization;
 using PLWinFormsApp.Helpers;
 using PressureLossCalculations.Models;
+using PressureLossCalculations.Services;
 
 namespace PLWinFormsApp
 {
 
     public partial class PressureLossApp : Form
     {
-
-        public PressureLossApp()
+        private readonly ICalculator _calculator;
+        public PressureLossApp(ICalculator calculator)
         {
+            _calculator = calculator;
             InitializeComponent();
         }
 
@@ -38,7 +40,7 @@ namespace PLWinFormsApp
 
             if (errorCohordinates.Count == 0)
             {
-                List<IResults> results = Utilities.GetAllResults(inputList);
+                List<IResults> results = WinFormUILogic.GetAllResults(inputList, _calculator);
                 GraphicalHelpers.ShowResults(results, resultDataGridView);
                 AlertLabel.Text = string.Empty;
             }
@@ -61,7 +63,7 @@ namespace PLWinFormsApp
             {
                 if (!row.IsNewRow)
                 {
-                    Utilities.GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
+                    NumericalInputsHelpers.GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
                     rowErrorCohordinates.RemoveAll(item => item == null);
 
                     if (rowErrorCohordinates.Count == 0)

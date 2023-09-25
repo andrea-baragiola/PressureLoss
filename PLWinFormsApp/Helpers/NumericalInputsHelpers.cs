@@ -1,7 +1,27 @@
-﻿namespace PLWinFormsApp.Helpers
+﻿using PressureLossCalculations.Models;
+
+namespace PLWinFormsApp.Helpers
 {
-    internal static class NumericalInputsHelpers
+    internal class NumericalInputsHelpers
     {
+        internal static void GetAndValidateRowInputs
+                (DataGridViewRow row, out InputData inputData, out List<Tuple<string, int>> rowErrorCohordinates)
+        {
+            rowErrorCohordinates = new List<Tuple<string, int>>
+            {
+                RetrieveDoubleValue(row, "PipeLength", out double pipeLength),
+                RetrieveDoubleValue(row, "PipeDiameter", out double pipeDiameter),
+                RetrieveDoubleValue(row, "PipeSurfaceFactor", out double pipeSurfaceFactor),
+                RetrieveDoubleValue(row, "WaterFlowRate", out double waterFlowRate),
+                RetrieveIntValue(row, "NumberOf90DegCurves", out int NumberOf90DegCurves),
+                RetrieveIntValue(row, "NumberOf45DegCurves", out int NumberOf45DegCurves),
+                RetrieveIntValue(row, "NumberOfTJunctions", out int NumberOfTJunctions)
+            };
+
+            inputData = new InputData
+                (pipeLength, pipeDiameter, waterFlowRate, pipeSurfaceFactor, NumberOf90DegCurves, NumberOf45DegCurves, NumberOfTJunctions);
+
+        }
 
         internal static Tuple<string, int> RetrieveDoubleValue(DataGridViewRow row, string columnName, out double value)
         {
