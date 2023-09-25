@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using PLConsoleApp.InputHelpers;
 using PressureLossCalculations;
-using PressureLossCalculations.Calculations;
+
 using PressureLossCalculations.Models;
+using PressureLossCalculations.Services;
 
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
@@ -12,7 +13,11 @@ List<IResults> ResultsList = new List<IResults>();
 while (true)
 {
     InputData inputData = GetAllInputs();
-    IResults results = new ResultsHazenWilliams(inputData);
+
+
+    IResults results = HazenWilliamsCalculator.ResultsHazenWilliamsCalculate(inputData);
+
+
     ResultsList.Add(results);
 
     Console.WriteLine("Do you want to add another pipe? (y/n)");
