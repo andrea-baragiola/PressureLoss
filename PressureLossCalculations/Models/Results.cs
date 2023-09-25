@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PressureLossCalculations.Models
 {
-    public class ResultsHazenWilliams : IResults
+    public class Results : IResults
     {
         public InputData InputData { get; set; }
         public double TotalPressureLoss { get; set; }
@@ -15,7 +15,7 @@ namespace PressureLossCalculations.Models
         public double LocalPressureLoss { get; set; }
         public double EquivalentLength { get; set; }
 
-        public ResultsHazenWilliams(
+        public Results(
             InputData inputData,
             double totalPressureLoss,
             double unitaryFrictionalPressureLoss,

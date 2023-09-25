@@ -10,7 +10,7 @@ namespace PressureLossCalculations.Services
     public class HazenWilliamsCalculator : ICalculator
     {
 
-        public ResultsHazenWilliams Calculate(InputData inputData)
+        public IResults Calculate(InputData inputData)
         {
 
             // FRICTIONAL LOSSES
@@ -34,7 +34,7 @@ namespace PressureLossCalculations.Services
             double totalPressureLoss = frictionalPressureLoss + localPressureLoss;
 
             // GENERATE RESULTS
-            ResultsHazenWilliams resultsHazenWilliams = new ResultsHazenWilliams(
+            IResults results = new Results(
                 inputData,
                 totalPressureLoss,
                 unitaryFrictionalPressureLoss,
@@ -42,7 +42,7 @@ namespace PressureLossCalculations.Services
                 localPressureLoss,
                 equivalentLength);
 
-            return resultsHazenWilliams;
+            return results;
 
         }
     }
