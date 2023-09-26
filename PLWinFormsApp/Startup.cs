@@ -8,6 +8,7 @@ namespace PLWinFormsApp
         public static IServiceProvider ConfigureService()
         {
             var provider = new ServiceCollection()
+                .AddTransient<PressureLossApp>()
                 .AddSingleton<ICalculator, HazenWilliamsCalculator>()
                 .BuildServiceProvider();
             return provider;

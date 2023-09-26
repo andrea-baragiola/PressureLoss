@@ -1,7 +1,5 @@
 using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
-using PLWinFormsApp.Helpers;
-using PressureLossCalculations.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLWinFormsApp
@@ -18,14 +16,9 @@ namespace PLWinFormsApp
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             var container = Startup.ConfigureService();
-            var calculator = container.GetRequiredService<ICalculator>();
 
-            
-
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new PressureLossApp(calculator));
+            Application.Run(container.GetRequiredService<PressureLossApp>());
         }
     }
 }
