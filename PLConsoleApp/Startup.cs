@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PLConsoleApp.UILogic;
 using PressureLossCalculations.Services;
 
 namespace PLConsoleApp
@@ -8,7 +9,8 @@ namespace PLConsoleApp
         public static IServiceProvider ConfigureService()
         {
             var provider = new ServiceCollection()
-                .AddSingleton<ICalculator, HazenWilliamsCalculator>()
+                .AddTransient<ConsoleUILogic>()
+                .AddTransient<ICalculator, HazenWilliamsCalculator>()
                 .BuildServiceProvider();
             return provider;
         }
