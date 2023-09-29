@@ -1,4 +1,6 @@
 using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLWinFormsApp
 {
@@ -13,10 +15,10 @@ namespace PLWinFormsApp
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var container = Startup.ConfigureService();
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new PressureLossApp());
+            Application.Run(container.GetRequiredService<PressureLossApp>());
         }
     }
 }

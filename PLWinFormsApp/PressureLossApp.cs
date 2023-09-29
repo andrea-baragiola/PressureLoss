@@ -1,17 +1,19 @@
 using System.Data.Common;
 using System.Globalization;
-using PressureLossCalculations;
+using PLWinFormsApp.Helpers;
+using PressureLossCalculations.Models;
+using PressureLossCalculations.Services;
 
 namespace PLWinFormsApp
 {
 
     public partial class PressureLossApp : Form
     {
-
-        public PressureLossApp()
+        private readonly ICalculator _calculator;
+        public PressureLossApp(ICalculator calculator)
         {
+            _calculator = calculator;
             InitializeComponent();
-
         }
 
         private void inputDataGridView_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
@@ -19,8 +21,8 @@ namespace PLWinFormsApp
             // Set default values for specific columns
             e.Row.Cells["Tratto"].Value = e.Row.Index + 1;
             e.Row.Cells["PipeLength"].Value = 0;
-            e.Row.Cells["PipeDiameter"].Value = 20;
-            e.Row.Cells["PipeSurfaceFactor"].Value = 100;
+            e.Row.Cells["PipeDiameter"].Value = 0;
+            e.Row.Cells["PipeSurfaceFactor"].Value = 0;
             e.Row.Cells["WaterFlowRate"].Value = 0;
             e.Row.Cells["NumberOf90DegCurves"].Value = 0;
             e.Row.Cells["NumberOf45DegCurves"].Value = 0;
@@ -30,16 +32,38 @@ namespace PLWinFormsApp
 
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            Utilities.ResetInputsCellsColor(inputDataGridView);
+            GraphicalHelpers.ResetInputsCellsColor(inputDataGridView);
 
-            List<InputData> inputList = new List<InputData>();
-            List<Tuple<string, int>> errorCohordinates = new List<Tuple<string, int>>();
+            List<InputData> inputList;
+            List<Tuple<string, int>> errorCohordinates;
+            GetErrorCohordinates(out inputList, out errorCohordinates);
 
+            if (errorCohordinates.Count == 0)
+            {
+                List<IResults> results = WinFormUILogic.GetAllResults(inputList, _calculator);
+                GraphicalHelpers.ShowResults(results, resultDataGridView);
+                AlertLabel.Text = string.Empty;
+            }
+            else
+            {
+                GraphicalHelpers.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView);
+                AlertLabel.Text = "Correct the highlighted values, then retry";
+            }
+
+            inputDataGridView.ClearSelection();
+
+
+        }
+
+        private void GetErrorCohordinates(out List<InputData> inputList, out List<Tuple<string, int>> errorCohordinates)
+        {
+            inputList = new List<InputData>();
+            errorCohordinates = new List<Tuple<string, int>>();
             foreach (DataGridViewRow row in inputDataGridView.Rows)
             {
                 if (!row.IsNewRow)
                 {
-                    Utilities.GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
+                    NumericalInputsHelpers.GetAndValidateRowInputs(row, out InputData inputdata, out List<Tuple<string, int>> rowErrorCohordinates);
                     rowErrorCohordinates.RemoveAll(item => item == null);
 
                     if (rowErrorCohordinates.Count == 0)
@@ -53,22 +77,14 @@ namespace PLWinFormsApp
                 }
             }
             errorCohordinates.RemoveAll(item => item == null);
-
-            if (errorCohordinates.Count == 0)
-            {
-                List<IResults> results = Utilities.GetAllResults(inputList);
-                Utilities.ShowResults(results, resultDataGridView);
-            }
-            else
-            {
-                Utilities.HighlightsMistakes(errorCohordinates, inputDataGridView, resultDataGridView);
-            }
-
-            inputDataGridView.ClearSelection();
-
-
         }
 
-
+        private void inputDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == inputDataGridView.Columns["Delete"].Index)
+            {
+                inputDataGridView.Rows.RemoveAt(e.RowIndex);
+            }
+        }
     }
 }
