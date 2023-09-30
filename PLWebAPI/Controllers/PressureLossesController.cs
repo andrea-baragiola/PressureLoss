@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using PressureLossCalculations.Models;
 using PressureLossCalculations.Services;
 
@@ -8,7 +9,7 @@ namespace PLWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PressureLossesController : ControllerBase
+    public partial class PressureLossesController : ControllerBase
     {
         private readonly ICalculator _calculator;
 
@@ -17,14 +18,19 @@ namespace PLWebAPI.Controllers
             _calculator = calculator;
         }
 
-
-        // GET api/PressureLosses/5
-        [HttpGet("{diameter}")]
-        public string Get(double diameter)
+        // POST api/PressureLosses
+        [HttpPost]
+        public string CalculatePressureLosses([FromBody] InputModel inputModel)
         {
-            InputData inputData = new InputData(1,diameter,1,100,1,1,1);
+            InputData inputData = new InputData(inputModel.Length,
+                                                inputModel.Diameter,
+                                                inputModel.WaterFlowRate,
+                                                inputModel.PipeSurfaceFactor,
+                                                inputModel.NumberOf90DegCurves,
+                                                inputModel.NumberOf45DegCurves,
+                                                inputModel.NumberOfTJunctions);
             IResults result = _calculator.Calculate(inputData);
-            return result.FrictionalPressureLoss.ToString();
+            return JsonSerializer.Serialize(result);
         }
 
     }
