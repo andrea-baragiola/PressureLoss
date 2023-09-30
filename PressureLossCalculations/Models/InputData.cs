@@ -16,11 +16,6 @@ namespace PressureLossCalculations.Models
         public int NumberOf45DegCurves { get; set; }
         public int NumberOfTJunctions { get; set; }
 
-        public InputData()
-        {
-            
-        }
-
         public InputData(double length, double diameter, double waterFlowRate, double pipeSurfaceFactor, int numberOf90DegCurves, int numberOf45DegCurves, int numberOfTJunctions)
         {
             PipeLength = length;
