@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using PressureLossCalculations.Models;
 using PressureLossCalculations.Services;
+using DataAccess.DbAccess;
+using DataAccess.Models;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,10 +15,12 @@ namespace PLWebAPI.Controllers
     public partial class PressureLossesController : ControllerBase
     {
         private readonly ICalculator _calculator;
+        private readonly IDataAccessHelper _dataAccessHelper;
 
-        public PressureLossesController(ICalculator calculator)
+        public PressureLossesController(ICalculator calculator, IDataAccessHelper dataAccessHelper)
         {
             _calculator = calculator;
+            _dataAccessHelper = dataAccessHelper;
         }
 
         // POST api/PressureLosses
@@ -33,5 +38,12 @@ namespace PLWebAPI.Controllers
             return JsonSerializer.Serialize(result);
         }
 
+        // GET TEST SQL
+        [HttpGet]
+        public async Task<string> GetDbTestAsync()
+        {
+            IEnumerable<Person> personList = await _dataAccessHelper.GetPeopleAsync();
+            return JsonSerializer.Serialize(personList);
+        }
     }
 }

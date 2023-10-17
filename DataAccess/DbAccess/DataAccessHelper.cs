@@ -1,20 +1,26 @@
 ﻿using System.Data;
 using DataAccess.Models;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 
-namespace DataAccess.DbAccess
+namespace DataAccess.DbAccess;
+
+public class DataAccessHelper : IDataAccessHelper
 {
-    public class DataAccessHelper
-    {
-        private readonly string connectionString = "Server=.;Database=People;User Id=sa;Password=Password1@;";
-        public async Task<IEnumerable<Person>> GetPeople()
-        {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(connectionString))
-            {
-                var output = await connection.QueryAsync<Person>("select * from PeopleTable");
+    private readonly IConfiguration _config;
 
-                return output;
-            }
+    public DataAccessHelper(IConfiguration config)
+    {
+        _config = config;
+    }
+
+    public async Task<IEnumerable<Person>> GetPeopleAsync()
+    {
+        using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(_config.GetConnectionString("myDb1")))
+        {
+            var output = await connection.QueryAsync<Person>("select * from PeopleTable");
+
+            return output;
         }
     }
 }

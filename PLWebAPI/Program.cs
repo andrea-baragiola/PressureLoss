@@ -1,3 +1,4 @@
+using DataAccess.DbAccess;
 using PressureLossCalculations.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICalculator, HazenWilliamsCalculator>();
+
+builder.Services.AddTransient<IDataAccessHelper, DataAccessHelper>();
 
 
 var app = builder.Build();
