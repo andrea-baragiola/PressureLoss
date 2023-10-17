@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLConsoleApp", "PLConsoleAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLWinFormsApp", "PLWinFormsApp\PLWinFormsApp.csproj", "{D89B7EB7-BF26-437C-A9E7-3316239268CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLWebAPI", "PLWebAPI\PLWebAPI.csproj", "{AE2F4D36-A2CE-42BB-8FD1-8412524713F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLWebAPI", "PLWebAPI\PLWebAPI.csproj", "{AE2F4D36-A2CE-42BB-8FD1-8412524713F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E7F90761-9B89-417D-B805-477242CE4898}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AE2F4D36-A2CE-42BB-8FD1-8412524713F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE2F4D36-A2CE-42BB-8FD1-8412524713F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE2F4D36-A2CE-42BB-8FD1-8412524713F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F90761-9B89-417D-B805-477242CE4898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F90761-9B89-417D-B805-477242CE4898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F90761-9B89-417D-B805-477242CE4898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F90761-9B89-417D-B805-477242CE4898}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
